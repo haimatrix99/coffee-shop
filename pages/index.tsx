@@ -12,10 +12,10 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>React Coffee</title>
+        <title>Coffee shop</title>
         <meta
           name="description"
-          content="Welcome to React Coffee order now from our store!"
+          content="Chào mừng bạn đến với cửa hàng coffee của tôi!"
           title="title"
         />
       </Head>
