@@ -3,7 +3,7 @@ import "@testing-library/jest-dom";
 
 import DrinksSummary from "../../../components/Drinks/DrinksSummary";
 
-const displayMsg = "Order drinks to go!";
+const displayMsg = "Đặt đồ uống mang đi!";
 
 test("Component displays heading message.", () => {
   render(<DrinksSummary />);

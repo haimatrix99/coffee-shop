@@ -13,7 +13,7 @@ export default function Menu() {
   return (
     <>
       <Head>
-        <title>Order Drinks</title>
+        <title>Đặt coffee</title>
         <meta
           name="description"
           content="Order React Coffee drinks to go!"
