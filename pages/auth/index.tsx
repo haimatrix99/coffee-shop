@@ -29,7 +29,7 @@ export default function AuthPage() {
   return (
     <>
       <Head>
-        <title>Sign In to React Coffee!</title>
+        <title>Đăng nhập</title>
         <meta
           name="description"
           content="Sign in to react coffee! Or Sign up to see your past orders."
