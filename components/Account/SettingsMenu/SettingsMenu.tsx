@@ -71,12 +71,12 @@ export default function SettingsMenu(props: SettingsMenuProps) {
               >
                 Đổi mật khẩu
               </button>
-              <button
+              {/* <button
                 name="Xoá tài khoản"
                 onClick={() => setMenuType("delete")}
               >
                 Xoá tài khoản
-              </button>
+              </button> */}
             </section>
             <div className="globalButton">
               <button
