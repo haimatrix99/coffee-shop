@@ -13,7 +13,7 @@ const Admin = dynamic(
   { loading: () => <LoadingSpinner /> }
 );
 
-export default function AccountPage() {
+export default function AdminPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -46,7 +46,7 @@ export default function AccountPage() {
           fill
         />
       </div>
-      <Admin session={session} />
+      <Admin />
     </>
   );
 }

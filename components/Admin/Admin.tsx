@@ -1,4 +1,3 @@
-import type { Session } from "next-auth";
 import dynamic from "next/dynamic";
 import { m } from "framer-motion";
 // My imports.
@@ -14,7 +13,7 @@ const AllOrders = dynamic(() => import("../AllOrders/AllOrders"), {
 });
 
 
-export default function UserProfile() {
+export default function Admin() {
   return (
     <m.div initial="in" animate="animate" variants={pageAnimation}>
       <Card style="container">
