@@ -23,7 +23,7 @@ function drinksAreSame(prevProps: DrinkItemProps, currProps: DrinkItemProps) {
 
 function DrinkItem(props: DrinkItemProps) {
   const dispatch = useAppDispatch();
-  const formattedPrice = `$${props.drink.price.toFixed(2)}`;
+  const formattedPrice = `${props.drink.price.toFixed(3)} VND`;
 
   const onAddToCartHandler = (amount: number) => {
     const newDrinkItem: DrinkItemInterface = {

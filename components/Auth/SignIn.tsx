@@ -7,7 +7,7 @@ import styles from "./AuthForm.module.css";
 import { CART_STORAGE_NAME } from "../../store/cart/cart-actions";
 import { sendCartData, fetchCartData } from "../../store/cart/cart-actions";
 import {
-  isValidEmail,
+  isValidPhoneNumber,
   isValidPassword,
 } from "../../utils/validation/input_validation";
 
@@ -18,11 +18,11 @@ type SignInProps = {
 
 export default function SignIn({ switchToSignUp, formId }: SignInProps) {
   const [formInputIsValid, setFormInputIsValid] = useState({
-    email: true,
+    phoneNumber: true,
     password: true,
   });
   const [invalidCredentials, setInvalidCredentials] = useState("");
-  const emailInputRef = useRef<HTMLInputElement>(null);
+  const phoneNumberInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -32,24 +32,24 @@ export default function SignIn({ switchToSignUp, formId }: SignInProps) {
     event.preventDefault();
 
     // Get user input.
-    const enteredEmail = emailInputRef.current
-      ? emailInputRef.current.value
+    const enteredPhoneNumber = phoneNumberInputRef.current
+      ? phoneNumberInputRef.current.value
       : "";
     const enteredPassword = passwordInputRef.current
       ? passwordInputRef.current.value
       : "";
 
     // Validate user input.
-    const enteredEmailIsValid = isValidEmail(enteredEmail);
+    const enteredPhoneNumberIsValid = isValidPhoneNumber(enteredPhoneNumber);
     const enteredPasswordIsValid = isValidPassword(enteredPassword);
 
     // Save validation for user validation feedback.
     setFormInputIsValid({
-      email: enteredEmailIsValid,
+      phoneNumber: enteredPhoneNumberIsValid,
       password: enteredPasswordIsValid,
     });
 
-    const formIsValid = enteredEmailIsValid && enteredPasswordIsValid;
+    const formIsValid = enteredPhoneNumberIsValid && enteredPasswordIsValid;
     if (!formIsValid) {
       // Do not submit form since inputs are invalid.
       return;
@@ -63,7 +63,7 @@ export default function SignIn({ switchToSignUp, formId }: SignInProps) {
     // Result will have an error if there is an error
     const result = await signIn("credentials", {
       redirect: false,
-      email: enteredEmail,
+      phoneNumber: enteredPhoneNumber,
       password: enteredPassword,
     });
 
@@ -104,8 +104,8 @@ export default function SignIn({ switchToSignUp, formId }: SignInProps) {
   }, [switchToSignUp]);
 
   // Get the input classes depending on the input validity.
-  const emailClasses = `${styles.control} ${
-    formInputIsValid.email ? "" : styles.invalid
+  const phoneNumberClasses = `${styles.control} ${
+    formInputIsValid.phoneNumber ? "" : styles.invalid
   }`;
   const passwordClasses = `${styles.control} ${
     formInputIsValid.password ? "" : styles.invalid
@@ -118,15 +118,15 @@ export default function SignIn({ switchToSignUp, formId }: SignInProps) {
         <p className={styles.errorMessage}>{invalidCredentials}</p>
       )}
       <form onSubmit={submitHandler} id={formId} name="sign-in">
-        <div className={emailClasses}>
-          <label htmlFor="email">Email của bạn</label>
+        <div className={phoneNumberClasses}>
+          <label htmlFor="phoneNumber">Số điện thoại của bạn</label>
           <input
-            type="email"
-            id="email"
-            ref={emailInputRef}
-            autoComplete="username"
+            type="phoneNumber"
+            id="phoneNumber"
+            ref={phoneNumberInputRef}
+            autoComplete="phoneNumber"
           />
-          {!formInputIsValid.email && <p>Xin nhập email của bạn</p>}
+          {!formInputIsValid.phoneNumber && <p>Xin nhập số điện thoại của bạn</p>}
         </div>
         <div className={passwordClasses}>
           <label htmlFor="password">Mật khẩu của bạn</label>

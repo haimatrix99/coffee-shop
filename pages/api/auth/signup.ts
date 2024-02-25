@@ -30,7 +30,7 @@ export default async function handler(
     // Check if user already exists.
     const userExists = await prisma.user.findUnique({
       where: {
-        email: userInfo.email,
+        phoneNumber: userInfo.phoneNumber,
       },
     });
     if (userExists) {
@@ -48,7 +48,7 @@ export default async function handler(
     try {
       await prisma.user.create({
         data: {
-          email: userInfo.email,
+          phoneNumber: userInfo.phoneNumber,
           firstName: userInfo.firstName,
           lastName: userInfo.lastName,
           password: hashedPassword, // DO NOT STORE PLAIN PASSWORDS in database, must be encrypted.
@@ -58,7 +58,7 @@ export default async function handler(
       res.status(500).json({ message: "Failed to create new user." });
       return;
     }
-    res.status(201).json({ message: `Created new user: ${userInfo.email}` });
+    res.status(201).json({ message: `Created new user: ${userInfo.phoneNumber}` });
   } else {
     res.status(403).json({ message: "Forbidden" });
   }

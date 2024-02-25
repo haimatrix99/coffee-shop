@@ -19,14 +19,14 @@ export default function RegisteredCheckout(props: RegisteredCheckoutProps) {
 
   const firstName = fullName.slice(0, nameDividerPos);
   const lastName = fullName.slice(nameDividerPos);
-  const email = props.session.user.email;
+  const phoneNumber = props.session.user.phoneNumber;
 
   const confirmHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
     // Save user info data to send to database.
     const userInfo: User = {
-      email: email,
+      phoneNumber: phoneNumber,
       firstName: firstName,
       lastName: lastName,
     };
@@ -42,8 +42,8 @@ export default function RegisteredCheckout(props: RegisteredCheckoutProps) {
           {`${firstName} ${lastName}`}
         </h2>
         <h2>
-          <span>Email:</span>
-          {`${email}`}
+          <span>Số điện thoại :</span>
+          {`${phoneNumber}`}
         </h2>
       </section>
       <CheckoutFormButtons onCancel={props.onCancel} onClose={props.onClose} />

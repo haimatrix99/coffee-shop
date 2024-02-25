@@ -6,7 +6,7 @@ import { isValidName } from "../../utils/validation/input_validation";
 
 /**
  * Calls our signUp API which creates a new user.
- * @param {User Object{firstName:string, lastName:string, email:string, password:string }} userInfo
+ * @param {User Object{firstName:string, lastName:string, phoneNumber:string, password:string }} userInfo
  * @returns string result message.
  */
 async function createUser(userInfo: RegisteredUser) {
@@ -39,7 +39,7 @@ export default function SignUp({ switchToSignIn, formId }: SingUpProps) {
   });
   const [invalidCredentials, setInvalidCredentials] = useState("");
   // React DOM object references.
-  const emailInputRef = useRef<HTMLInputElement>(null);
+  const phoneNumberInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const firstNameInputRef = useRef<HTMLInputElement>(null);
   const lastNameInputRef = useRef<HTMLInputElement>(null);
@@ -53,8 +53,8 @@ export default function SignUp({ switchToSignIn, formId }: SingUpProps) {
     event.preventDefault();
 
     // Get user input.
-    const enteredEmail = emailInputRef.current
-      ? emailInputRef.current.value
+    const enteredPhoneNumber = phoneNumberInputRef.current
+      ? phoneNumberInputRef.current.value
       : "";
     const enteredPassword = passwordInputRef.current
       ? passwordInputRef.current.value
@@ -67,7 +67,7 @@ export default function SignUp({ switchToSignIn, formId }: SingUpProps) {
       : "";
 
     // Validate user input name.
-    // Let email and password get handled by input HTML object.
+    // Let phoneNumber and password get handled by input HTML object.
     const enteredFirstNameIsValid = isValidName(enteredFirstName);
     const enteredLastNameIsValid = isValidName(enteredLastName);
 
@@ -83,7 +83,7 @@ export default function SignUp({ switchToSignIn, formId }: SingUpProps) {
     }
 
     const userInfo: RegisteredUser = {
-      email: enteredEmail,
+      phoneNumber: enteredPhoneNumber,
       password: enteredPassword,
       firstName: enteredFirstName,
       lastName: enteredLastName,
@@ -139,13 +139,13 @@ export default function SignUp({ switchToSignIn, formId }: SingUpProps) {
           {!formInputIsValid.lastName && <p>Xin mời nhập tên.</p>}
         </div>
         <div className={styles.control}>
-          <label htmlFor="email">Email của bạn</label>
+          <label htmlFor="phoneNumber">Số điện thoại của bạn</label>
           <input
-            type="email"
-            id="email"
+            type="phoneNumber"
+            id="phoneNumber"
             required
-            ref={emailInputRef}
-            autoComplete="email"
+            ref={phoneNumberInputRef}
+            autoComplete="phoneNumber"
           />
         </div>
         <div className={styles.control}>

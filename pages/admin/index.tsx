@@ -4,12 +4,12 @@ import Head from "next/head";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 // My imports.
-import styles from "./AccountPage.module.css";
+import styles from "./AdminPage.module.css";
 import coffeeLove from "../../public/background/coffeeLove.jpg";
 // My components.
 import LoadingSpinner from "components/UI/LoadingSpinner";
-const AccountMenu = dynamic(
-  () => import("../../components/Account/AccountMenu"),
+const Admin = dynamic(
+  () => import("../../components/Admin/Admin"),
   { loading: () => <LoadingSpinner /> }
 );
 
@@ -28,7 +28,7 @@ export default function AccountPage() {
   return (
     <>
       <Head>
-        <title>Tài khoản</title>
+        <title>Admin</title>
         <meta
           name="description"
           content="Change your password or view your past orders."
@@ -46,7 +46,7 @@ export default function AccountPage() {
           fill
         />
       </div>
-      <AccountMenu session={session} />
+      <Admin session={session} />
     </>
   );
 }

@@ -17,18 +17,18 @@ export function validatePassword(
   return passwordSchema.safeParse(password);
 }
 /**
- * Determines if a string email is valid.
- * @param {string} email
+ * Determines if a string phoneNumber is valid.
+ * @param {string} phoneNumber
  * @returns boolean
  */
-export function validateEmail(
-  email: string
+export function validatePhoneNumber(
+  phoneNumber: string
 ): z.SafeParseReturnType<string, string> {
-  const emailSchema = z
-    .string({ invalid_type_error: "Email must be a string." })
-    .email({ message: "Invalid email address." });
+  const phoneNumberSchema = z
+    .string({ invalid_type_error: "phoneNumber must be a string." })
+    .nonempty({ message: "Invalid phoneNumber address." });
 
-  return emailSchema.safeParse(email);
+  return phoneNumberSchema.safeParse(phoneNumber);
 }
 
 /**
@@ -53,7 +53,7 @@ export function validateUserData(
   userData: User
 ): z.SafeParseReturnType<User, User> {
   const UserSchema = z.object({
-    email: z.string().trim().email("Invalid email entered."),
+    phoneNumber: z.string().trim().nonempty("Invalid phoneNumber entered."),
     firstName: z.string().trim().nonempty("Invalid name entered."),
     lastName: z.string().trim().nonempty("Invalid name entered"),
   });
@@ -67,7 +67,7 @@ export function validateRegisteredUserData(
   userData: RegisteredUser
 ): z.SafeParseReturnType<RegisteredUser, RegisteredUser> {
   const UserSchema = z.object({
-    email: z.string().trim().email("Invalid email entered."),
+    phoneNumber: z.string().trim().nonempty("Invalid phoneNumber entered."),
     firstName: z.string().trim().nonempty("Invalid name entered."),
     lastName: z.string().trim().nonempty("Invalid name entered"),
     password: z

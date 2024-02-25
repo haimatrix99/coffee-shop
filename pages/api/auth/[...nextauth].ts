@@ -2,6 +2,7 @@ import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 // My imports.
 import validateCredentials from "../../../utils/db/validate-credentials";
+import prisma from "utils/db/prisma";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -12,15 +13,15 @@ export const authOptions: NextAuthOptions = {
       type: "credentials",
       credentials: {},
       async authorize(credentials) {
-        const { email, password } = credentials as {
-          email: string;
+        const { phoneNumber, password } = credentials as {
+          phoneNumber: string;
           password: string;
         };
 
         // Get user db document and validate credentials.
         let responseData = null;
         try {
-          responseData = await validateCredentials(email, password);
+          responseData = await validateCredentials(phoneNumber, password);
           if (!responseData) {
             throw new Error();
           }
@@ -40,17 +41,27 @@ export const authOptions: NextAuthOptions = {
         // Return user object.
         return {
           id: responseData.user.id,
-          email: responseData.user.email,
+          phoneNumber: responseData.user.phoneNumber,
           name: `${responseData.user.firstName} ${responseData.user.lastName}`,
-          image: null,
+          isAdmin: responseData.user.isAdmin,
         };
       },
     }),
   ],
   callbacks: {
-    session: async ({ session, token }) => {
+    session: async ({ session, token}) => {
       if (session?.user && token.sub) {
+        const user = await prisma.user.findUnique({
+          where: {
+            id: token.sub,
+          },
+        });
+
         session.user.id = token.sub;
+        if (user) {
+          session.user.phoneNumber = user.phoneNumber;
+          session.user.isAdmin = user.isAdmin;
+        }
       }
       return session;
     },

@@ -31,7 +31,7 @@ type ReceiptProps = {
 };
 
 export default function Receipt(props: ReceiptProps) {
-  const formattedTotalPrice = `$${props.order.totalPrice.toFixed(2)}`;
+  const formattedTotalPrice = `${props.order.totalPrice.toFixed(3)} VND`;
   const localDate = props.order.orderDate.toLocaleString();
   const summaryStyles = `${styles.summary} ${
     props.showReceiptItems ? styles.divider : ""

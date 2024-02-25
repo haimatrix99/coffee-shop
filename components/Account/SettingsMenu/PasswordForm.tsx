@@ -95,13 +95,13 @@ export default function PasswordForm(props: PasswordFormProps) {
         ref={formRef}
       >
         <div className={styles.hidden}>
-          <label htmlFor="username">Email</label>
+          <label htmlFor="phoneNumber">Số điện thoại</label>
           <input
             type="text"
-            id="username"
-            value={props.session.user.email}
+            id="phoneNumber"
+            value={props.session.user.number}
             readOnly
-            autoComplete="username"
+            autoComplete="phoneNumber"
           />
         </div>
         <div className={styles.control}>

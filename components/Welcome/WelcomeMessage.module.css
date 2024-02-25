@@ -1,3 +1,7 @@
+.takeAway {
+  display: flex;
+}
+
 .message {
   display: flex;
   flex-direction: column;

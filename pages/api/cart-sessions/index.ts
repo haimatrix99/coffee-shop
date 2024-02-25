@@ -16,7 +16,7 @@ export default async function handler(
     res.status(401).json({ message: "User is not logged in!" });
     return;
   }
-  const email = session.user.email;
+  const phoneNumber = session.user.phoneNumber;
 
   switch (req.method) {
     case "GET":
@@ -27,7 +27,7 @@ export default async function handler(
         try {
           cartSession = await prisma.cartSession.findUnique({
             where: {
-              email: email,
+              phoneNumber: phoneNumber,
             },
           });
         } catch (error) {
@@ -45,7 +45,7 @@ export default async function handler(
         try {
           await prisma.cartSession.upsert({
             where: {
-              email: email,
+              phoneNumber: phoneNumber,
             },
             update: {
               items: cartData.items,
@@ -53,7 +53,7 @@ export default async function handler(
               totalPrice: cartData.totalPrice,
             },
             create: {
-              email: email,
+              phoneNumber: phoneNumber,
               items: cartData.items,
               numberOfCartItems: cartData.numberOfCartItems,
               totalPrice: cartData.totalPrice,

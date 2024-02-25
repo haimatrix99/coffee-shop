@@ -20,7 +20,7 @@ function CartItem(props: CartItemProps) {
   const { id, name, amount, price } = props.item;
   const dispatch = useAppDispatch();
   // Format the price to always show two decimal points.
-  const priceF = `$${price.toFixed(2)}`;
+  const priceF = `${price.toFixed(3)} VND`;
 
   // Handlers for item buttons(empty/trash, subtract, add).
   const removeItemCompletelyHandler = (id: string) => {

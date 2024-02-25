@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Coffee shop</title>
+        <title>Coffee Shop</title>
         <meta
           name="description"
           content="Chào mừng bạn đến với cửa hàng coffee của tôi!"

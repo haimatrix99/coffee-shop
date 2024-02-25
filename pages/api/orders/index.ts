@@ -18,7 +18,7 @@ export default async function handler(
   const session = await getServerSession(req, res, authOptions);
 
   if (req.method === "POST") {
-    // req.body Expected: user:{fName, lName, email}, cart:{items, numOfItems, totalPrice}
+    // req.body Expected: user:{fName, lName, phoneNumber}, cart:{items, numOfItems, totalPrice}
     const { user, cart }: { user: User; cart: Cart } = req.body;
 
     // Backend Validation: Validate user input.
@@ -41,7 +41,7 @@ export default async function handler(
     try {
       userDB = await prisma.user.findUnique({
         where: {
-          email: user.email,
+          phoneNumber: user.phoneNumber,
         },
       });
     } catch (error) {
@@ -53,7 +53,7 @@ export default async function handler(
 
     // If user order as a guest.
     if (!session) {
-      // If the user email already exists.
+      // If the user phoneNumber already exists.
       if (userDB !== null) {
         res.status(401).json({
           message: "Guest user already has an account. Please sign in.",
@@ -61,8 +61,8 @@ export default async function handler(
         return;
       }
     } else {
-      // Make sure the email is from the user's session.
-      user.email = session.user.email;
+      // Make sure the phoneNumber is from the user's session.
+      user.phoneNumber = session.user.phoneNumber;
     }
 
     // Verify Cart items.
@@ -90,7 +90,7 @@ export default async function handler(
     // Create Receipt Object.
     const receipt: Receipt = {
       name: user.firstName + user.lastName,
-      email: user.email,
+      phoneNumber: user.phoneNumber,
       items: [],
       totalItems: 0,
       totalPrice: 0,
@@ -147,7 +147,7 @@ export default async function handler(
       res.status(401).json({ message: "User is not logged in." });
       return;
     }
-    const email = session.user.email;
+    const phoneNumber = session.user.phoneNumber;
 
     // Get past orders.
     let pastOrders;
@@ -157,7 +157,7 @@ export default async function handler(
           orderDate: "desc",
         },
         where: {
-          email: email,
+          phoneNumber: phoneNumber,
         },
       });
     } catch (error) {

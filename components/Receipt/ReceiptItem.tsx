@@ -8,7 +8,7 @@ type ReceiptItemProps = {
 };
 
 function ReceiptItem({ name, price, qty }: ReceiptItemProps) {
-  const formattedPrice = `$${price.toFixed(2)}`;
+  const formattedPrice = `${price.toFixed(3)} VND`;
 
   return (
     <li className={styles.receiptItem}>

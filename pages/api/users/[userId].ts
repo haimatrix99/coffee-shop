@@ -11,7 +11,7 @@ import {
 import { SafeParseReturnType } from "zod";
 import { hashPassword } from "../../../utils/auth/auth";
 
-const DEMO_EMAIL = "demo@gmail.com";
+const DEMO_PHONE_NUMBER = "0912345678";
 // Validate if a request is validated or not
 // Protects API routes.
 export default async function handler(
@@ -45,7 +45,7 @@ export default async function handler(
 
     // Get the user's credential
     const dbUserId: string = session.user.id;
-    const userEmail: string = session.user.email;
+    const userPhoneNumber: string = session.user.phoneNumber;
     const enteredPassword: string = req.body.password;
 
     // Invalid userId passed as args
@@ -57,7 +57,7 @@ export default async function handler(
     }
 
     // If user is the demo account then do not delete.
-    if (userEmail === DEMO_EMAIL) {
+    if (userPhoneNumber === DEMO_PHONE_NUMBER) {
       // Guard the demo's account password.
       res.status(423).json({
         message:
@@ -69,7 +69,7 @@ export default async function handler(
     // Get user db document and validate credentials.
     let responseData = null;
     try {
-      responseData = await validateCredentials(userEmail, enteredPassword);
+      responseData = await validateCredentials(userPhoneNumber, enteredPassword);
       if (!responseData) {
         throw new Error();
       }
@@ -106,7 +106,7 @@ export default async function handler(
     }
 
     // Successful deletion.
-    res.status(200).json({ message: `User: ${userEmail} has been deleted.` });
+    res.status(200).json({ message: `User: ${userPhoneNumber} has been deleted.` });
     return;
   } else if (req.method === "PATCH") {
     // Get current session.
@@ -120,7 +120,7 @@ export default async function handler(
 
     // Get the user's credential
     const dbUserId: string = session.user.id;
-    const userEmail: string = session.user.email;
+    const userPhoneNumber: string = session.user.phoneNumber;
     const enteredOldPassword: string = req.body.currentPassword;
     const enteredNewPassword: string = req.body.newPassword;
 
@@ -133,7 +133,7 @@ export default async function handler(
     }
 
     // Attempt to modify demo account.
-    if (userEmail === DEMO_EMAIL) {
+    if (userPhoneNumber === DEMO_PHONE_NUMBER) {
       // Guard the demo's account password.
       res.status(423).json({
         message:
@@ -155,7 +155,7 @@ export default async function handler(
     // Validate the user's credentials.
     let responseData = null;
     try {
-      responseData = await validateCredentials(userEmail, enteredOldPassword);
+      responseData = await validateCredentials(userPhoneNumber, enteredOldPassword);
       if (!responseData) {
         throw new Error();
       }

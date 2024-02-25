@@ -32,7 +32,7 @@ export default function CartContent(props: CartContentProps) {
   const cart = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
-  const totalPriceFormatted = `$${cart.totalPrice.toFixed(2)}`;
+  const totalPriceFormatted = `${cart.totalPrice.toFixed(3)} VND`;
   const hasItems = cart.items.length > 0;
 
   // Submission Handler for Checkout.

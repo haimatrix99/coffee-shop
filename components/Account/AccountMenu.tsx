@@ -8,6 +8,7 @@ import { pageAnimation } from "../../utils/animations/animation";
 // My components.
 import Card from "../UI/Card";
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
+import { useRouter } from "next/router";
 const SettingsMenu = dynamic(() => import("./SettingsMenu/SettingsMenu"), {
   loading: () => <LoadingSpinner />,
 });
@@ -23,7 +24,10 @@ type UserProfileProps = {
 export default function UserProfile(props: UserProfileProps) {
   const [viewSettings, setViewSettings] = useState(false);
   const [showPastOrders, setShowPastOrders] = useState(false);
+  const router = useRouter();
   const user = props.session.user;
+  console.log(user);
+  const isAdmin = user.isAdmin;
 
   const toggleShowPastOrdersHandler = () => {
     setShowPastOrders((prevState) => !prevState);
@@ -32,9 +36,14 @@ export default function UserProfile(props: UserProfileProps) {
   const goToProfileMenuHandler = () => {
     setViewSettings(false);
   };
+
   const goToSettingsMenuHandler = () => {
     setShowPastOrders(false);
     setViewSettings(true);
+  };
+
+  const goToAdminPageHandler = () => {
+    router.push("/admin");
   };
 
   return (
@@ -42,6 +51,19 @@ export default function UserProfile(props: UserProfileProps) {
       <Card style="container">
         <section className={styles.profile}>
           <h1>{user.name}</h1>
+          {isAdmin && (
+            <>
+            <button
+              name="Admin"
+              onClick={goToAdminPageHandler}
+              className={styles.viewSettings}
+            >
+              Quản lý cửa hàng
+            </button>
+          </>
+          )
+            
+          }
           {!viewSettings && (
             <>
               <button

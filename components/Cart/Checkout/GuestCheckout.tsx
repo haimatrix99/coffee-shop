@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 // My imports.
 import styles from "./GuestCheckout.module.css";
 import type User from "../../../models/User";
-import { isValidEmail, isValidName } from "utils/validation/input_validation";
+import { isValidPhoneNumber, isValidName } from "utils/validation/input_validation";
 // My component.
 import CheckoutFormButtons from "./CheckoutFormButtons";
 
@@ -16,12 +16,12 @@ export default function GuestCheckout(props: GuestCheckoutProps) {
   const [formInputValid, setFormInputValid] = useState({
     firstName: true,
     lastName: true,
-    email: true,
+    phoneNumber: true,
   });
 
   const firstNameInputRef = useRef<HTMLInputElement>(null);
   const lastNameInputRef = useRef<HTMLInputElement>(null);
-  const emailInputRef = useRef<HTMLInputElement>(null);
+  const phoneNumberInputRef = useRef<HTMLInputElement>(null);
 
   const confirmHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -33,23 +33,23 @@ export default function GuestCheckout(props: GuestCheckoutProps) {
     const enteredLastName = lastNameInputRef.current
       ? lastNameInputRef.current.value
       : "";
-    const enteredEmail = emailInputRef.current
-      ? emailInputRef.current.value
+    const enteredPhoneNumber = phoneNumberInputRef.current
+      ? phoneNumberInputRef.current.value
       : "";
 
     // Validate user inputs.
     const enteredFirstNameIsValid = isValidName(enteredFirstName);
     const enteredLastNameIsValid = isValidName(enteredLastName);
-    const enteredEmailIsValid = isValidEmail(enteredEmail);
+    const enteredPhoneNumberIsValid = isValidPhoneNumber(enteredPhoneNumber);
 
     // Save validation for user validation feedback.
     setFormInputValid({
       firstName: enteredFirstNameIsValid,
       lastName: enteredLastNameIsValid,
-      email: enteredEmailIsValid,
+      phoneNumber: enteredPhoneNumberIsValid,
     });
     const formIsValid =
-      enteredFirstNameIsValid && enteredLastNameIsValid && enteredEmailIsValid;
+      enteredFirstNameIsValid && enteredLastNameIsValid && enteredPhoneNumberIsValid;
     if (!formIsValid) {
       // Do not submit form if inputs are invalid.
       return;
@@ -57,7 +57,7 @@ export default function GuestCheckout(props: GuestCheckoutProps) {
 
     // Save user info data to send to database.
     const userInfo: User = {
-      email: enteredEmail,
+      phoneNumber: enteredPhoneNumber,
       firstName: enteredFirstName,
       lastName: enteredLastName,
     };
@@ -72,8 +72,8 @@ export default function GuestCheckout(props: GuestCheckoutProps) {
   const lastNameClasses = `${styles.control} ${
     formInputValid.lastName ? "" : styles.invalid
   }`;
-  const emailClasses = `${styles.control} ${
-    formInputValid.email ? "" : styles.invalid
+  const phoneNumberClasses = `${styles.control} ${
+    formInputValid.phoneNumber ? "" : styles.invalid
   }`;
 
   return (
@@ -88,15 +88,15 @@ export default function GuestCheckout(props: GuestCheckoutProps) {
         <input type="text" id="last-name" ref={lastNameInputRef} />
         {!formInputValid.lastName && <p>Xin vui lòng nhập đúng tên</p>}
       </div>
-      <div className={emailClasses}>
-        <label htmlFor="email">Email</label>
+      <div className={phoneNumberClasses}>
+        <label htmlFor="phoneNumber">Số điện thoại</label>
         <input
-          type="email"
-          id="email"
-          ref={emailInputRef}
-          placeholder="name@gmail.com"
+          type="phoneNumber"
+          id="phoneNumber"
+          ref={phoneNumberInputRef}
+          placeholder="0123456789"
         />
-        {!formInputValid.email && <p>Xin vui lòng nhập đúng email(@).</p>}
+        {!formInputValid.phoneNumber && <p>Xin vui lòng nhập đúng sô điện thoại.</p>}
       </div>
       <CheckoutFormButtons onClose={props.onClose} onCancel={props.onCancel} />
     </form>

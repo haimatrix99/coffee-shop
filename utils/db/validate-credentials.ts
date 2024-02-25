@@ -9,7 +9,7 @@ type ResponseData = {
 };
 
 export default async function validateCredentials(
-  email: string,
+  phoneNumber: string,
   enteredPassword: string
 ): Promise<ResponseData> {
   // Get the user's data from our db.
@@ -17,7 +17,7 @@ export default async function validateCredentials(
   try {
     user = await prisma.user.findUnique({
       where: {
-        email: email,
+        phoneNumber: phoneNumber,
       },
     });
   } catch (error) {
@@ -32,7 +32,7 @@ export default async function validateCredentials(
   if (!user) {
     return {
       user: null,
-      errorMessage: `User: ${email} not found!`,
+      errorMessage: `User: ${phoneNumber} not found!`,
       httpCode: 404,
     };
   }

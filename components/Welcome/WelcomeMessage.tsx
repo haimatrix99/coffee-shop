@@ -1,6 +1,7 @@
 import type { Session } from "next-auth";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 // My imports.
 import styles from "./WelcomeMessage.module.css";
 
@@ -18,7 +19,8 @@ export default function WelcomeMessage() {
   return (
     <section className={styles.message}>
       <h2>{greetingMessage}</h2>
-      <p>
+      <p className={styles.takeAway}>
+        <MdOutlineShoppingCartCheckout size={46} color="white"/>
         <Link href="/menu">Đặt coffee mang đi!</Link>
       </p>
     </section>
