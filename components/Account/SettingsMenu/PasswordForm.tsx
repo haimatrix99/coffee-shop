@@ -99,7 +99,7 @@ export default function PasswordForm(props: PasswordFormProps) {
           <input
             type="text"
             id="phoneNumber"
-            value={props.session.user.number}
+            value={props.session.user.phoneNumber}
             readOnly
             autoComplete="phoneNumber"
           />
