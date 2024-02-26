@@ -21,6 +21,7 @@ const initialOrderObject: Order = {
   totalItems: 0,
   totalPrice: 0,
   orderDate: new Date(),
+  isFinished: false
 };
 
 export default function Cart(props: CartProps) {
@@ -47,6 +48,7 @@ export default function Cart(props: CartProps) {
         totalItems: cart.numberOfCartItems,
         totalPrice: cart.totalPrice,
         orderDate: new Date(),
+        isFinished: false
       };
       setOrderData(newOrder);
     } else {
