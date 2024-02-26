@@ -39,6 +39,53 @@
   padding-bottom: 0.6rem;
   padding-right: 0.5rem;
 }
+
+.summaryAdmin {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  padding-right: 0.5rem;
+}
+
+.name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+.name h3 {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.name span {
+  color: var(--complementary-color);
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.phoneNumber {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.phoneNumber h3 {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  margin: 0 0;
+}
+.phoneNumber span {
+  color: var(--complementary-color);
+  font-size: 1.2rem;
+}
+
 .summary h3{
   margin: 0.5rem 0;
   color: var(--primary-color);
@@ -47,7 +94,7 @@
 .divider {
   border-top: 2px solid var(--complementary-color);
 }
-.totalItems, .totalPrice {
+.totalItems, .totalPrice, .status {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -62,3 +109,6 @@
   color: var(--price-color);
 }
 
+.status {
+  text-align: center;
+}

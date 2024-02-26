@@ -28,6 +28,7 @@ function getReceiptItems(items: DrinkItem[], date: string): JSX.Element[] {
 type ReceiptProps = {
   order: Order;
   showReceiptItems: boolean;
+  showForAdmin: boolean;
 };
 
 export default function Receipt(props: ReceiptProps) {
@@ -39,6 +40,18 @@ export default function Receipt(props: ReceiptProps) {
 
   return (
     <div className={styles.receipt}>
+      {props.showForAdmin && (
+          <div className={styles.name}>
+            <h3>Tên</h3>
+            <span>{props.order.name}</span>
+          </div>
+      )}
+      {props.showForAdmin && (
+          <div className={styles.phoneNumber}>
+            <h3>Số điện thoại</h3>
+            <span>{props.order.phoneNumber}</span>
+          </div>
+      )}
       <div className={styles.date}>
         <h3>Ngày đặt hàng</h3>
         <time>
@@ -59,6 +72,12 @@ export default function Receipt(props: ReceiptProps) {
           <h3>Giá</h3>
           <span className={styles.price}>{formattedTotalPrice}</span>
         </div>
+        {props.order.isFinished ? 
+        (<div className={styles.status}>
+          <h3>Đã hoàn thành</h3>
+        </div> ) : (<div className={styles.status}>
+          <h3>Chưa hoàn thành</h3>
+        </div>)}
       </section>
     </div>
   );

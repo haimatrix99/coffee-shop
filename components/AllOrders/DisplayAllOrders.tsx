@@ -42,7 +42,7 @@ export default function DisplayAllOrders(props: DisplayAllOrdersProps) {
         <AnimatePresence>
           {showReceipt && modalOrderReceipt && (
             <Modal onClose={closeDetailedReceipt}>
-              <Receipt order={modalOrderReceipt} showReceiptItems={true} />
+              <Receipt order={modalOrderReceipt} showReceiptItems={true} showForAdmin={true}/>
               <div className={styles.actions}>
                 <button onClick={closeDetailedReceipt}>Close</button>
               </div>

@@ -43,7 +43,7 @@ function AllOrderList(props: AllOrderListProps) {
         onClick={showDetailedReceipt.bind(null, orderObj)}
         role="button"
       >
-        <Receipt order={orderObj} showReceiptItems={false} />
+        <Receipt order={orderObj} showReceiptItems={false} showForAdmin={true} />
       </m.li>
     );
   });

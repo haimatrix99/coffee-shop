@@ -47,6 +47,7 @@ model Order {
   orderDate  DateTime     @db.Date
   totalItems Int
   totalPrice Float
+  isFinished Boolean    @default(false)
 }
 
 model User {

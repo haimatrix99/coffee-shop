@@ -43,7 +43,7 @@ function PastOrderList(props: PastOrderListProps) {
         onClick={showDetailedReceipt.bind(null, orderObj)}
         role="button"
       >
-        <Receipt order={orderObj} showReceiptItems={false} />
+        <Receipt order={orderObj} showReceiptItems={false} showForAdmin={false}/>
       </m.li>
     );
   });
