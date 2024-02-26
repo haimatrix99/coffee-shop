@@ -31,6 +31,7 @@
   "dependencies": {
     "@prisma/client": "^4.16.2",
     "@reduxjs/toolkit": "^1.8.5",
+    "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
     "framer-motion": "^10.1.0",
     "mongodb": "^4.9.1",

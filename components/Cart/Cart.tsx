@@ -46,7 +46,7 @@ export default function Cart(props: CartProps) {
     resultMessage: string,
     cart: CartInterface | null
   ) => {
-    if (successful && cart && session) {
+    if (successful && cart && session ) {
       const newOrder: Order = {
         items: cart.items,
         totalItems: cart.numberOfCartItems,
@@ -83,7 +83,7 @@ export default function Cart(props: CartProps) {
           <h3 className={styles.errorMessage}>{primaryErrorMessage}</h3>
         )}
         <h3 className={messageStyle}>{statusMessage}</h3>
-        {!error && <Receipt order={orderData} showReceiptItems={true} showForAdmin={false}/>}
+        {!error && <Receipt order={orderData} showReceiptItems={true} showForAdmin={false} showFinishedButton={false} />}
         <div className={styles.actions}>
           <button className={styles.actions} onClick={props.onClose}>
             Close

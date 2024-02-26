@@ -4,6 +4,9 @@ import type DrinkItem from "../../models/DrinkItem";
 import type Order from "../../models/Order";
 // My component.
 import ReceiptItem from "./ReceiptItem";
+import { useSession } from "next-auth/react";
+import axios from "axios";
+import { useRouter } from "next/router";
 
 /**
  * Gets the list of Receipt Item components.
@@ -29,6 +32,7 @@ type ReceiptProps = {
   order: Order;
   showReceiptItems: boolean;
   showForAdmin: boolean;
+  showFinishedButton: boolean;
 };
 
 export default function Receipt(props: ReceiptProps) {
@@ -37,6 +41,25 @@ export default function Receipt(props: ReceiptProps) {
   const summaryStyles = `${styles.summary} ${
     props.showReceiptItems ? styles.divider : ""
   }`;
+  const {data: session} = useSession();
+  const router = useRouter();
+  
+  const updateStatusOrder = (order_id: string | undefined) => {
+    if (order_id) {
+      axios({
+        method: 'put',
+        url: '/api/orders',
+        data: {
+          order_id: order_id,
+        }
+      }).then(
+        r => router.reload()
+      ).catch(
+        e => console.log(e)
+      );
+      
+    }
+  }
 
   return (
     <div className={styles.receipt}>
@@ -72,12 +95,19 @@ export default function Receipt(props: ReceiptProps) {
           <h3>Giá</h3>
           <span className={styles.price}>{formattedTotalPrice}</span>
         </div>
-        {props.order.isFinished ? 
-        (<div className={styles.status}>
-          <h3>Đã hoàn thành</h3>
-        </div> ) : (<div className={styles.status}>
-          <h3>Chưa hoàn thành</h3>
-        </div>)}
+        <div className={styles.receiptFooter}>
+          { props.order.isFinished ? 
+          (<div className={styles.status}>
+            <h3>Đã hoàn thành</h3>
+          </div> ) : (<div className={styles.status}>
+            <h3>Chưa hoàn thành</h3>
+          </div>)}
+          {(session && session.user.isAdmin && props.showFinishedButton ) && (
+            <div className={styles.actions}>
+              <button className={styles.finished} disabled={props.order.isFinished} onClick={() => updateStatusOrder(props.order.id)}>Hoàn thành đơn hàng</button>
+            </div>
+          )}
+        </div>
       </section>
     </div>
   );

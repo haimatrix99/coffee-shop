@@ -112,3 +112,40 @@
 .status {
   text-align: center;
 }
+
+.finished {
+  background-color: var(--button-color);
+  border: 1px solid var(--complementary-darkest);
+  color: white;
+}
+
+.actions {
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.actions button {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  border-radius: 25px;
+  margin-left: 1rem;
+}
+.actions button:hover,
+.actions button:active {
+  background-color: var(--button-color-active);
+  border-color: var(--complementary-dark);
+  color: white;
+}
+
+.actions button:disabled {
+  background-color: gray;
+  border-color: black;
+  color: white;
+  cursor: default;
+}
+
+.receiptFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

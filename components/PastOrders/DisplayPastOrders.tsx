@@ -42,7 +42,7 @@ export default function DisplayPastOrders(props: DisplayPastOrdersProps) {
         <AnimatePresence>
           {showReceipt && modalOrderReceipt && (
             <Modal onClose={closeDetailedReceipt}>
-              <Receipt order={modalOrderReceipt} showReceiptItems={true} showForAdmin={false} />
+              <Receipt order={modalOrderReceipt} showReceiptItems={true} showForAdmin={false} showFinishedButton={false} />
               <div className={styles.actions}>
                 <button onClick={closeDetailedReceipt}>Close</button>
               </div>

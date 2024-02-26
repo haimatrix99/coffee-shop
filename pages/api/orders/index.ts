@@ -166,6 +166,27 @@ export default async function handler(
       return;
     }
     res.status(200).json(pastOrders);
+  } else if (req.method === "PUT") {
+    if (!session) {
+      // Protect our API route. Only authenticated users are allowed to receive past order data.
+      res.status(401).json({ message: "User is not logged in." });
+      return;
+    }
+    try {
+      console.log(req.body);
+      await prisma.order.update({
+        data: {
+          isFinished: true,
+        },
+        where: {
+          id: req.body.order_id,
+        },
+      });
+    } catch (error) {
+      res.status(500).json({ message: "Failed to update orders from this user." });
+      return;
+    }
+    res.status(200).json("OK");
   } else {
     res.status(418).json({
       message: "I am a teapot and I refuse to brew coffee with teapot.",
