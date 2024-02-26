@@ -7,6 +7,7 @@ import type CartInterface from "../../models/Cart";
 // My components.
 import LoadingSpinner from "../UI/LoadingSpinner";
 import CartContent from "./CartContent";
+import { useSession } from "next-auth/react";
 const Receipt = dynamic(() => import("../Receipt/Receipt"), {
   loading: () => <LoadingSpinner />,
 });
@@ -21,7 +22,9 @@ const initialOrderObject: Order = {
   totalItems: 0,
   totalPrice: 0,
   orderDate: new Date(),
-  isFinished: false
+  isFinished: false,
+  name: "",
+  phoneNumber: ""
 };
 
 export default function Cart(props: CartProps) {
@@ -31,6 +34,7 @@ export default function Cart(props: CartProps) {
   const [error, setError] = useState(false); // Error sending form to the database.
   const [statusMessage, setStatusMessage] = useState(""); // Database result message after attempt for order submission.
   const [orderData, setOrderData] = useState(initialOrderObject);
+  const { data: session } = useSession();
 
   // Handlers.
   const submittingHandler = (submitting: boolean) => {
@@ -42,13 +46,15 @@ export default function Cart(props: CartProps) {
     resultMessage: string,
     cart: CartInterface | null
   ) => {
-    if (successful && cart) {
+    if (successful && cart && session) {
       const newOrder: Order = {
         items: cart.items,
         totalItems: cart.numberOfCartItems,
         totalPrice: cart.totalPrice,
         orderDate: new Date(),
-        isFinished: false
+        isFinished: false,
+        name: session.user.name,
+        phoneNumber: session.user.phoneNumber
       };
       setOrderData(newOrder);
     } else {
@@ -77,7 +83,7 @@ export default function Cart(props: CartProps) {
           <h3 className={styles.errorMessage}>{primaryErrorMessage}</h3>
         )}
         <h3 className={messageStyle}>{statusMessage}</h3>
-        {!error && <Receipt order={orderData} showReceiptItems={true} />}
+        {!error && <Receipt order={orderData} showReceiptItems={true} showForAdmin={false}/>}
         <div className={styles.actions}>
           <button className={styles.actions} onClick={props.onClose}>
             Close

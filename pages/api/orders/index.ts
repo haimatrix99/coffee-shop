@@ -95,6 +95,7 @@ export default async function handler(
       totalItems: 0,
       totalPrice: 0,
       orderDate: new Date(),
+      isFinished: false
     };
 
     // Check if each item in the list from the cart is valid.
