@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 // My imports.
 import styles from "./AdminPage.module.css";
-import coffeeLove from "../../public/background/coffeeLove.jpg";
+import coffeeLove from "../../public/background/menu.jpg";
 // My components.
 import LoadingSpinner from "components/UI/LoadingSpinner";
 const Admin = dynamic(

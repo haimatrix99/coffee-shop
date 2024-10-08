@@ -3,7 +3,7 @@ import Image from "next/image";
 import { m } from "framer-motion";
 // My imports.
 import styles from "./MenuPage.module.css";
-import drinksImage from "../../public/background/coffee-drinks.jpg";
+import drinksImage from "../../public/background/drinks.jpg";
 import { pageAnimation } from "../../utils/animations/animation";
 // My Components.
 import DrinksSummary from "../../components/Drinks/DrinksSummary";

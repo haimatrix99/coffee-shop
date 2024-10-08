@@ -6,7 +6,7 @@ import Image from "next/image";
 import { m } from "framer-motion";
 // My imports.
 import styles from "./AuthPage.module.css";
-import coffeeImage from "../../public/background/coffeeWhiteBackground.jpg";
+import coffeeImage from "../../public/background/menu.jpg";
 import { pageAnimation } from "../../utils/animations/animation";
 // My components.
 import LoadingSpinner from "../../components/UI/LoadingSpinner";
