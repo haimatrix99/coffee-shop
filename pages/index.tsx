@@ -3,7 +3,7 @@ import Image from "next/image";
 import { m } from "framer-motion";
 // My imports.
 import styles from "./HomePage.module.css";
-import coffeeShopImage from "../public/background/coffee-shop.jpg";
+import coffeeShopImage from "../public/background/coffee-shop-bg.jpg";
 import { pageAnimation } from "../utils/animations/animation";
 // My component.
 import WelcomeMessage from "../components/Welcome/WelcomeMessage";
